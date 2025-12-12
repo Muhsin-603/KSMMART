@@ -1,14 +1,13 @@
 /**
  * Smart-Sahaya - Government Services Web App
  * Main JavaScript file with modular functions
- * UPDATED: Added Duration Tags & Badges
+ * UPDATED: Added Profile Management & Linked Common Docs
  */
 
 // ============================================
 // Global State & Constants
 // ============================================
 
-// 🧠 THE BRAIN: Now includes 'mode' AND 'duration' for each service
 const appData = {
   "services": [
     {
@@ -191,6 +190,13 @@ const appData = {
 let storedDocuments = []
 let appointments = []
 let signatureDataUrl = null
+// Common Docs List for Profile
+const commonDocTypes = [
+    { id: "aadhar", name: "Aadhaar Card" },
+    { id: "pan", name: "PAN Card" },
+    { id: "voter", name: "Voter ID" },
+    { id: "photo", name: "Passport Size Photo" }
+];
 
 // ============================================
 // Initialization
@@ -198,6 +204,11 @@ let signatureDataUrl = null
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("App data loaded from embedded source")
+  
+  // Load State
+  loadStoredDocuments()
+  
+  // Initialize Modules
   initializeMobileMenu()
   initializeServiceSelector()
   initializeDigiLocker()
@@ -205,9 +216,138 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeAppointmentScheduler()
   initializeSignatureUpload()
   initializeFormExport()
+  
+  // New Profile Module
+  initializeProfile()
+  
   updateDashboardCounts()
   setMinDate()
 })
+
+// ============================================
+// 👤 PROFILE MANAGEMENT (NEW)
+// ============================================
+
+function initializeProfile() {
+    const profileForm = document.getElementById("profileForm");
+    if (!profileForm) return;
+
+    // Load saved profile data
+    loadUserProfile();
+    
+    // Render the Identity Vault list
+    renderCommonDocs();
+
+    // Handle Form Save
+    profileForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        saveUserProfile();
+    });
+}
+
+function loadUserProfile() {
+    const profile = JSON.parse(localStorage.getItem("smartSahaya_profile") || "{}");
+    
+    if (profile.name) document.getElementById("profName").value = profile.name;
+    if (profile.phone) document.getElementById("profPhone").value = profile.phone;
+    if (profile.email) document.getElementById("profEmail").value = profile.email;
+    if (profile.aadhaar) document.getElementById("profAadhaar").value = profile.aadhaar;
+    if (profile.address) document.getElementById("profAddress").value = profile.address;
+}
+
+function saveUserProfile() {
+    const profile = {
+        name: document.getElementById("profName").value,
+        phone: document.getElementById("profPhone").value,
+        email: document.getElementById("profEmail").value,
+        aadhaar: document.getElementById("profAadhaar").value,
+        address: document.getElementById("profAddress").value,
+    };
+
+    localStorage.setItem("smartSahaya_profile", JSON.stringify(profile));
+    showToast("success", "Profile Saved", "Your details have been updated successfully.");
+}
+
+function renderCommonDocs() {
+    const list = document.getElementById("commonDocsList");
+    if (!list) return;
+
+    list.innerHTML = commonDocTypes.map(docType => {
+        // Check if this doc type is already uploaded in storedDocuments
+        // We check if any stored document name includes the docType name (Simple match)
+        const isUploaded = storedDocuments.some(d => d.name.toLowerCase().includes(docType.name.toLowerCase()));
+        
+        const statusColor = isUploaded ? "text-green-600 bg-green-50 border-green-200" : "text-gray-500 bg-white border-gray-100";
+        const iconColor = isUploaded ? "text-green-600 bg-green-100" : "text-gray-400 bg-gray-100";
+        const buttonText = isUploaded ? "Update" : "Upload";
+        const buttonClass = isUploaded 
+            ? "text-teal bg-teal/10 border-teal/20" 
+            : "text-gray-600 bg-white border-gray-300 hover:border-teal hover:text-teal";
+
+        return `
+        <li class="flex items-center justify-between p-3 rounded-xl border ${statusColor} transition-all">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center ${iconColor}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        ${isUploaded 
+                            ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>' 
+                            : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>'
+                        }
+                    </svg>
+                </div>
+                <div>
+                    <p class="font-medium text-sm">${docType.name}</p>
+                    <p class="text-[10px] ${isUploaded ? 'text-green-600' : 'text-gray-400'}">
+                        ${isUploaded ? 'Verified & Stored' : 'Missing'}
+                    </p>
+                </div>
+            </div>
+            
+            <button onclick="triggerProfileUpload('${docType.id}')" class="px-3 py-1.5 text-xs font-semibold rounded-lg border ${buttonClass} transition-colors">
+                ${buttonText}
+            </button>
+            <input type="file" id="upload_${docType.id}" class="hidden" accept=".pdf,.jpg,.png" onchange="handleProfileUpload('${docType.name}', this)">
+        </li>
+        `;
+    }).join("");
+}
+
+// Trigger hidden input
+window.triggerProfileUpload = function(id) {
+    document.getElementById(`upload_${id}`).click();
+}
+
+// Handle Profile File Upload
+window.handleProfileUpload = function(docName, input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    // Simulate AI Scan
+    showToast("warning", "Scanning...", "Verifying document authenticity.");
+
+    setTimeout(() => {
+        // Create document object
+        const doc = {
+            id: Date.now() + Math.random().toString(36).substr(2, 9),
+            name: `${docName}_${new Date().getFullYear()}.pdf`, // Standardize name
+            type: file.type,
+            size: file.size,
+            data: URL.createObjectURL(file), // For demo, we use object URL
+            uploadedAt: new Date().toISOString(),
+            tag: "profile_verified" // Special tag
+        };
+
+        // Add to main storage
+        storedDocuments.push(doc);
+        saveDocuments();
+        
+        // Refresh UI
+        renderCommonDocs();
+        updateDashboardCounts(); // Updates dashboard if open
+        showToast("success", "Verified!", `${docName} has been verified and added to your Vault.`);
+    }, 1500);
+}
+
 
 // ============================================
 // Mobile Menu
@@ -579,6 +719,7 @@ function deleteDocument(docId) {
   saveDocuments()
   renderStoredDocuments()
   updateDashboardCounts()
+  if (typeof renderCommonDocs === "function") renderCommonDocs(); // Refresh profile if open
   showToast("success", "Deleted", "Document has been removed.")
 }
 
