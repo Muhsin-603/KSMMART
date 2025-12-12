@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart-Sahaya — Your Digital Government Assistant</title>
+  <title>Smart-Sahaya — Dashboard</title>
   <meta name="description" content="Smart-Sahaya: A user-friendly platform for government services, document management, and application tracking.">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -25,42 +25,40 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="font-sans bg-gray-50 text-gray-800">
-  <!-- Navigation -->
+<body class="font-sans bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+  
   <nav class="bg-primary text-white sticky top-0 z-50 shadow-lg">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2">
+      <a href="index.html" class="flex items-center gap-2">
         <div class="w-10 h-10 bg-warm rounded-full flex items-center justify-center">
           <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
           </svg>
         </div>
         <span class="font-bold text-lg">Smart-Sahaya</span>
-      </div>
+      </a>
       <button id="mobileMenuBtn" class="md:hidden p-2" aria-label="Toggle menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
       <ul id="navLinks" class="hidden md:flex gap-6 text-sm font-medium">
-        <li><a href="#services" class="hover:text-warm transition-colors">Services</a></li>
-        <li><a href="#digilocker" class="hover:text-warm transition-colors">DigiLocker</a></li>
-        <li><a href="#tracker" class="hover:text-warm transition-colors">Track Status</a></li>
-        <li><a href="#appointment" class="hover:text-warm transition-colors">Appointments</a></li>
+        <li><a href="services.html" class="hover:text-warm transition-colors">Services</a></li>
+        <li><a href="digilocker.html" class="hover:text-warm transition-colors">DigiLocker</a></li>
+        <li><a href="tracker.html" class="hover:text-warm transition-colors">Track Status</a></li>
+        <li><a href="appointments.html" class="hover:text-warm transition-colors">Appointments</a></li>
       </ul>
     </div>
-    <!-- Mobile Menu -->
     <div id="mobileMenu" class="hidden md:hidden bg-primary-dark px-4 py-3">
       <ul class="flex flex-col gap-3 text-sm">
-        <li><a href="#services" class="block py-2 hover:text-warm">Services</a></li>
-        <li><a href="#digilocker" class="block py-2 hover:text-warm">DigiLocker</a></li>
-        <li><a href="#tracker" class="block py-2 hover:text-warm">Track Status</a></li>
-        <li><a href="#appointment" class="block py-2 hover:text-warm">Appointments</a></li>
+        <li><a href="services.html" class="block py-2 hover:text-warm">Services</a></li>
+        <li><a href="digilocker.html" class="block py-2 hover:text-warm">DigiLocker</a></li>
+        <li><a href="tracker.html" class="block py-2 hover:text-warm">Track Status</a></li>
+        <li><a href="appointments.html" class="block py-2 hover:text-warm">Appointments</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
   <header class="bg-gradient-to-br from-primary to-primary-dark text-white py-16 md:py-24">
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h1 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">
@@ -70,20 +68,19 @@
         Your one-stop digital assistant for certificates, applications, and appointments. Fast, transparent, and accessible.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#services" class="bg-warm text-primary font-semibold px-8 py-3 rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
+        <a href="services.html" class="bg-warm text-primary font-semibold px-8 py-3 rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
           Apply Now
         </a>
-        <a href="#tracker" class="bg-white/10 backdrop-blur text-white font-semibold px-8 py-3 rounded-full border-2 border-white/30 hover:bg-white/20 transition-all">
+        <a href="tracker.html" class="bg-white/10 backdrop-blur text-white font-semibold px-8 py-3 rounded-full border-2 border-white/30 hover:bg-white/20 transition-all">
           Track Application
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Dashboard Cards -->
-  <section class="max-w-6xl mx-auto px-4 -mt-8 relative z-10">
+  <section class="max-w-6xl mx-auto px-4 -mt-8 relative z-10 mb-16">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow">
+      <a href="digilocker.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
         <div class="w-12 h-12 bg-teal/10 rounded-lg flex items-center justify-center mb-3">
           <svg class="w-6 h-6 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -91,8 +88,9 @@
         </div>
         <h3 class="font-semibold text-sm">Documents</h3>
         <p class="text-2xl font-bold text-primary" id="docCount">0</p>
-      </div>
-      <div class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow">
+      </a>
+
+      <a href="tracker.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
         <div class="w-12 h-12 bg-warm/20 rounded-lg flex items-center justify-center mb-3">
           <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -100,8 +98,9 @@
         </div>
         <h3 class="font-semibold text-sm">Pending</h3>
         <p class="text-2xl font-bold text-yellow-600" id="pendingCount">0</p>
-      </div>
-      <div class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow">
+      </a>
+
+      <a href="tracker.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
         <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-3">
           <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -109,8 +108,9 @@
         </div>
         <h3 class="font-semibold text-sm">Approved</h3>
         <p class="text-2xl font-bold text-green-600" id="approvedCount">0</p>
-      </div>
-      <div class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow">
+      </a>
+
+      <a href="appointments.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
         <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
           <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -118,214 +118,11 @@
         </div>
         <h3 class="font-semibold text-sm">Appointments</h3>
         <p class="text-2xl font-bold text-primary" id="appointmentCount">0</p>
-      </div>
+      </a>
     </div>
   </section>
 
-  <!-- Document Requirements Finder -->
-  <section id="services" class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-2xl md:text-3xl font-bold text-primary mb-2 text-center">Document Requirements Finder</h2>
-    <p class="text-gray-600 text-center mb-8">Select a service to see required documents</p>
-    
-    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-      <div class="mb-6">
-        <label for="serviceSelect" class="block text-sm font-medium text-gray-700 mb-2">Choose a Service</label>
-        <select id="serviceSelect" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all">
-          <option value="">-- Select a Service --</option>
-        </select>
-      </div>
-      
-      <div id="documentsRequired" class="hidden">
-        <h3 class="font-semibold text-lg mb-4 flex items-center gap-2">
-          <svg class="w-5 h-5 text-teal" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-          </svg>
-          Required Documents
-        </h3>
-        <ul id="documentsList" class="space-y-2"></ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- DigiLocker Section -->
-  <section id="digilocker" class="bg-gradient-to-br from-teal/5 to-primary/5 py-16">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold text-primary mb-2 text-center">DigiLocker</h2>
-      <p class="text-gray-600 text-center mb-8">Securely store and manage your documents</p>
-      
-      <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-        <!-- Upload Area -->
-        <div class="mb-8">
-          <div id="dropZone" class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-teal transition-colors cursor-pointer">
-            <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-            </svg>
-            <p class="text-gray-600 mb-2">Drag & drop files here, or click to browse</p>
-            <p class="text-sm text-gray-400">Supports PDF, JPG, PNG (Max 5MB)</p>
-            <input type="file" id="fileInput" class="hidden" accept=".pdf,.jpg,.jpeg,.png" multiple>
-          </div>
-        </div>
-
-        <!-- Stored Documents -->
-        <div>
-          <h3 class="font-semibold text-lg mb-4">Your Documents</h3>
-          <div id="storedDocuments" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <p class="text-gray-400 col-span-full text-center py-8">No documents uploaded yet</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Application Status Tracker -->
-  <section id="tracker" class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-2xl md:text-3xl font-bold text-primary mb-2 text-center">Application Status Tracker</h2>
-    <p class="text-gray-600 text-center mb-8">Track your application progress in real-time</p>
-    
-    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-      <!-- Search -->
-      <div class="flex gap-3 mb-8">
-        <input type="text" id="applicationIdInput" placeholder="Enter Application ID (e.g., APP001)" class="flex-1 p-3 border-2 border-gray-200 rounded-xl focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all">
-        <button id="trackBtn" class="bg-teal text-white px-6 py-3 rounded-xl font-semibold hover:bg-teal/90 transition-colors">
-          Track
-        </button>
-      </div>
-
-      <!-- Timeline -->
-      <div id="timelineContainer" class="hidden">
-        <div class="flex items-center justify-between mb-6">
-          <h3 class="font-semibold text-lg" id="applicationTitle">Application Details</h3>
-          <span id="applicationBadge" class="px-3 py-1 rounded-full text-sm font-medium"></span>
-        </div>
-        <div id="timeline" class="relative"></div>
-      </div>
-
-      <div id="noApplicationFound" class="hidden text-center py-8">
-        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-          </svg>
-        </div>
-        <p class="text-gray-600">Application not found. Please check your Application ID.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Appointment Scheduler -->
-  <section id="appointment" class="bg-gradient-to-br from-warm/10 to-primary/5 py-16">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold text-primary mb-2 text-center">Appointment Scheduler</h2>
-      <p class="text-gray-600 text-center mb-8">Book an appointment with a government officer</p>
-      
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Booking Form -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-          <h3 class="font-semibold text-lg mb-6">Book New Appointment</h3>
-          <form id="appointmentForm">
-            <div class="mb-4">
-              <label for="appointmentService" class="block text-sm font-medium text-gray-700 mb-2">Service Type</label>
-              <select id="appointmentService" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-teal outline-none" required>
-                <option value="">-- Select Service --</option>
-              </select>
-            </div>
-            <div class="mb-4">
-              <label for="appointmentDate" class="block text-sm font-medium text-gray-700 mb-2">Preferred Date</label>
-              <input type="date" id="appointmentDate" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-teal outline-none" required>
-            </div>
-            <div class="mb-6">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Available Time Slots</label>
-              <div id="timeSlots" class="grid grid-cols-3 gap-2">
-                <button type="button" class="time-slot p-2 border-2 border-gray-200 rounded-lg text-sm hover:border-teal transition-colors" data-time="09:00">9:00 AM</button>
-                <button type="button" class="time-slot p-2 border-2 border-gray-200 rounded-lg text-sm hover:border-teal transition-colors" data-time="10:00">10:00 AM</button>
-                <button type="button" class="time-slot p-2 border-2 border-gray-200 rounded-lg text-sm hover:border-teal transition-colors" data-time="11:00">11:00 AM</button>
-                <button type="button" class="time-slot p-2 border-2 border-gray-200 rounded-lg text-sm hover:border-teal transition-colors" data-time="14:00">2:00 PM</button>
-                <button type="button" class="time-slot p-2 border-2 border-gray-200 rounded-lg text-sm hover:border-teal transition-colors" data-time="15:00">3:00 PM</button>
-                <button type="button" class="time-slot p-2 border-2 border-gray-200 rounded-lg text-sm hover:border-teal transition-colors" data-time="16:00">4:00 PM</button>
-              </div>
-              <input type="hidden" id="selectedTime" required>
-            </div>
-            <button type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary-dark transition-colors">
-              Request Appointment
-            </button>
-          </form>
-        </div>
-
-        <!-- Upcoming Appointments -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-          <h3 class="font-semibold text-lg mb-6">Your Appointments</h3>
-          <div id="appointmentsList" class="space-y-4">
-            <p class="text-gray-400 text-center py-8">No appointments scheduled</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Digital Signature & Form Export -->
-  <section id="signature" class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-2xl md:text-3xl font-bold text-primary mb-2 text-center">Digital Signature & Form Export</h2>
-    <p class="text-gray-600 text-center mb-8">Upload your signature and export completed forms</p>
-    
-    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Signature Upload -->
-        <div>
-          <h3 class="font-semibold text-lg mb-4">Upload Digital Signature</h3>
-          <div id="signatureDropZone" class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-teal transition-colors cursor-pointer mb-4">
-            <svg class="w-10 h-10 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-            </svg>
-            <p class="text-sm text-gray-600">Click to upload signature image</p>
-            <input type="file" id="signatureInput" class="hidden" accept=".jpg,.jpeg,.png">
-          </div>
-          <div id="signaturePreview" class="hidden">
-            <p class="text-sm text-gray-600 mb-2">Your Signature:</p>
-            <img id="signatureImage" src="/placeholder.svg" alt="Digital signature" class="max-h-20 border rounded-lg p-2 bg-gray-50">
-          </div>
-        </div>
-
-        <!-- Form Export -->
-        <div>
-          <h3 class="font-semibold text-lg mb-4">Sample Application Form</h3>
-          <div id="sampleForm" class="border-2 border-gray-200 rounded-xl p-4 bg-gray-50 mb-4">
-            <div class="space-y-3 text-sm">
-              <div class="flex justify-between">
-                <span class="text-gray-600">Applicant Name:</span>
-                <span class="font-medium">John Doe</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-gray-600">Service:</span>
-                <span class="font-medium">Birth Certificate</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-gray-600">Application ID:</span>
-                <span class="font-medium">APP001</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-gray-600">Date:</span>
-                <span class="font-medium" id="formDate"></span>
-              </div>
-              <div class="border-t pt-3 mt-3">
-                <span class="text-gray-600">Digital Signature:</span>
-                <div id="formSignature" class="mt-2 h-12 flex items-center">
-                  <span class="text-gray-400 text-xs">No signature uploaded</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <button id="exportPdfBtn" class="w-full bg-teal text-white py-3 rounded-xl font-semibold hover:bg-teal/90 transition-colors flex items-center justify-center gap-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-            </svg>
-            Export as PDF
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-primary text-white py-12">
+  <footer class="bg-primary text-white py-12 mt-auto">
     <div class="max-w-6xl mx-auto px-4">
       <div class="grid md:grid-cols-3 gap-8 mb-8">
         <div>
@@ -342,10 +139,10 @@
         <div>
           <h4 class="font-semibold mb-4">Quick Links</h4>
           <ul class="space-y-2 text-sm text-blue-200">
-            <li><a href="#services" class="hover:text-warm transition-colors">Services</a></li>
-            <li><a href="#digilocker" class="hover:text-warm transition-colors">DigiLocker</a></li>
-            <li><a href="#tracker" class="hover:text-warm transition-colors">Track Application</a></li>
-            <li><a href="#appointment" class="hover:text-warm transition-colors">Book Appointment</a></li>
+            <li><a href="services.html" class="hover:text-warm transition-colors">Services</a></li>
+            <li><a href="digilocker.html" class="hover:text-warm transition-colors">DigiLocker</a></li>
+            <li><a href="tracker.html" class="hover:text-warm transition-colors">Track Application</a></li>
+            <li><a href="appointments.html" class="hover:text-warm transition-colors">Book Appointment</a></li>
           </ul>
         </div>
         <div>
@@ -363,7 +160,6 @@
     </div>
   </footer>
 
-  <!-- Toast Notification -->
   <div id="toast" class="fixed bottom-4 right-4 transform translate-y-full opacity-0 transition-all duration-300 z-50">
     <div class="bg-white rounded-xl shadow-2xl p-4 flex items-center gap-3 max-w-sm">
       <div id="toastIcon" class="w-10 h-10 rounded-full flex items-center justify-center"></div>
@@ -371,21 +167,6 @@
         <p id="toastTitle" class="font-semibold text-sm"></p>
         <p id="toastMessage" class="text-xs text-gray-600"></p>
       </div>
-    </div>
-  </div>
-
-  <!-- Document Preview Modal -->
-  <div id="previewModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
-      <div class="flex items-center justify-between p-4 border-b">
-        <h3 id="previewTitle" class="font-semibold"></h3>
-        <button id="closePreviewBtn" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-        </button>
-      </div>
-      <div id="previewContent" class="p-4 overflow-auto max-h-[70vh]"></div>
     </div>
   </div>
 

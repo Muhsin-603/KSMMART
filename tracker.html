@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart-Sahaya — Track Status</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { primary: '#0f4c81', teal: '#0ea5a4', warm: '#ffd166', 'primary-dark': '#0a3a63' } } } }
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-sans bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+  <nav class="bg-primary text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-10 h-10 bg-warm rounded-full flex items-center justify-center">
+          <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <span class="font-bold text-lg">Smart-Sahaya</span>
+      </a>
+      <ul class="hidden md:flex gap-6 text-sm font-medium">
+        <li><a href="services.html" class="hover:text-warm transition-colors">Services</a></li>
+        <li><a href="digilocker.html" class="hover:text-warm transition-colors">DigiLocker</a></li>
+        <li><a href="tracker.html" class="text-warm">Track Status</a></li> <li><a href="appointments.html" class="hover:text-warm transition-colors">Appointments</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="flex-grow">
+    <section class="max-w-6xl mx-auto px-4 py-16">
+      <h2 class="text-2xl md:text-3xl font-bold text-primary mb-2 text-center">Application Status Tracker</h2>
+      <p class="text-gray-600 text-center mb-8">Track your application progress in real-time</p>
+      
+      <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+        <div class="flex gap-3 mb-8">
+          <input type="text" id="applicationIdInput" placeholder="Enter Application ID (e.g., APP001)" class="flex-1 p-3 border-2 border-gray-200 rounded-xl focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all">
+          <button id="trackBtn" class="bg-teal text-white px-6 py-3 rounded-xl font-semibold hover:bg-teal/90 transition-colors">
+            Track
+          </button>
+        </div>
+
+        <div id="timelineContainer" class="hidden">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-semibold text-lg" id="applicationTitle">Application Details</h3>
+            <span id="applicationBadge" class="px-3 py-1 rounded-full text-sm font-medium"></span>
+          </div>
+          <div id="timeline" class="relative"></div>
+        </div>
+
+        <div id="noApplicationFound" class="hidden text-center py-8">
+          <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+          </div>
+          <p class="text-gray-600">Application not found. Please check your Application ID.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-primary text-white py-8 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 text-center text-sm text-blue-200">
+      <p>© 2025 Smart-Sahaya.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="fixed bottom-4 right-4 transform translate-y-full opacity-0 transition-all duration-300 z-50">
+    <div class="bg-white rounded-xl shadow-2xl p-4 flex items-center gap-3 max-w-sm">
+      <div id="toastIcon" class="w-10 h-10 rounded-full flex items-center justify-center"></div>
+      <div>
+        <p id="toastTitle" class="font-semibold text-sm"></p>
+        <p id="toastMessage" class="text-xs text-gray-600"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

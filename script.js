@@ -77,22 +77,25 @@ function initializeMobileMenu() {
  */
 function initializeServiceSelector() {
   const serviceSelect = document.getElementById("serviceSelect")
-  const appointmentService = document.getElementById("appointmentService")
+  // SAFETY CHECK: If this element isn't on the page, stop.
+  if (!serviceSelect) return 
 
+  const appointmentService = document.getElementById("appointmentService") // Might be null on services page
+  
   if (!appData) return
 
-  // Populate service dropdowns
   appData.services.forEach((service) => {
     const option = document.createElement("option")
     option.value = service.id
     option.textContent = service.name
     serviceSelect.appendChild(option)
 
-    // Clone for appointment form
-    appointmentService.appendChild(option.cloneNode(true))
+    // Only try to append to appointment service if it exists
+    if (appointmentService) {
+        appointmentService.appendChild(option.cloneNode(true))
+    }
   })
 
-  // Handle service selection
   serviceSelect.addEventListener("change", (e) => {
     const serviceId = e.target.value
     displayRequiredDocuments(serviceId)
@@ -143,6 +146,7 @@ function displayRequiredDocuments(serviceId) {
  */
 function initializeDigiLocker() {
   const dropZone = document.getElementById("dropZone")
+  if (!dropZone) return
   const fileInput = document.getElementById("fileInput")
 
   // Load stored documents from localStorage
@@ -355,6 +359,7 @@ document.getElementById("closePreviewBtn")?.addEventListener("click", () => {
  */
 function initializeStatusTracker() {
   const trackBtn = document.getElementById("trackBtn")
+  if (!trackBtn) return
   const input = document.getElementById("applicationIdInput")
 
   trackBtn.addEventListener("click", () => trackApplication(input.value))
@@ -442,6 +447,7 @@ function getStatusBadgeClass(status) {
  */
 function initializeAppointmentScheduler() {
   const form = document.getElementById("appointmentForm")
+  if (!form) return
   const timeSlots = document.querySelectorAll(".time-slot")
 
   // Load appointments from localStorage
@@ -584,6 +590,7 @@ function renderAppointments() {
  */
 function initializeSignatureUpload() {
   const dropZone = document.getElementById("signatureDropZone")
+  if (!dropZone) return
   const input = document.getElementById("signatureInput")
 
   // Load saved signature
@@ -639,6 +646,7 @@ function displaySignature(dataUrl) {
  */
 function initializeFormExport() {
   const exportBtn = document.getElementById("exportPdfBtn")
+  if (!exportBtn) return
 
   exportBtn.addEventListener("click", exportFormAsPdf)
 }
