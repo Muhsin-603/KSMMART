@@ -1,12 +1,193 @@
 /**
  * Smart-Sahaya - Government Services Web App
  * Main JavaScript file with modular functions
+ * UPDATED: Added Duration Tags & Badges
  */
 
 // ============================================
 // Global State & Constants
 // ============================================
-let appData = null
+
+// 🧠 THE BRAIN: Now includes 'mode' AND 'duration' for each service
+const appData = {
+  "services": [
+    {
+      "id": "birth-cert",
+      "name": "Birth Certificate",
+      "mode": "Online",
+      "duration": "7-14 Days",
+      "requiredDocuments": [
+        "Hospital Birth Record / Discharge Summary",
+        "Parent's Identity Proof (Aadhaar/Passport)",
+        "Parent's Marriage Certificate",
+        "Address Proof (Utility Bill/Ration Card)",
+        "Affidavit (if birth not registered within 21 days)"
+      ]
+    },
+    {
+      "id": "death-cert",
+      "name": "Death Certificate",
+      "mode": "Offline",
+      "duration": "10-15 Days",
+      "requiredDocuments": [
+        "Hospital Death Certificate / Medical Certificate",
+        "Deceased's Identity Proof",
+        "Applicant's Identity Proof",
+        "Cremation/Burial Certificate",
+        "Address Proof of Deceased"
+      ]
+    },
+    {
+      "id": "income-cert",
+      "name": "Income Certificate",
+      "mode": "Online",
+      "duration": "3-5 Days",
+      "requiredDocuments": [
+        "Identity Proof (Aadhaar/Voter ID)",
+        "Address Proof",
+        "Salary Slip / Income Tax Return",
+        "Self-Declaration of Income",
+        "Ration Card (if applicable)"
+      ]
+    },
+    {
+      "id": "caste-cert",
+      "name": "Caste Certificate",
+      "mode": "Online",
+      "duration": "14-21 Days",
+      "requiredDocuments": [
+        "Identity Proof (Aadhaar/Voter ID)",
+        "Address Proof",
+        "Parent's Caste Certificate",
+        "School Leaving Certificate",
+        "Affidavit declaring caste"
+      ]
+    },
+    {
+      "id": "domicile-cert",
+      "name": "Domicile Certificate",
+      "mode": "Offline",
+      "duration": "15-30 Days",
+      "requiredDocuments": [
+        "Identity Proof (Aadhaar/Passport)",
+        "Address Proof (15+ years residence)",
+        "Birth Certificate",
+        "School/College Certificates",
+        "Affidavit of Residence"
+      ]
+    },
+    {
+      "id": "driving-license",
+      "name": "Driving License",
+      "mode": "Offline",
+      "duration": "30 Days",
+      "requiredDocuments": [
+        "Age Proof (Birth Certificate/Aadhaar)",
+        "Address Proof",
+        "Passport Size Photos",
+        "Medical Certificate (Form 1A)",
+        "Learner's License (for permanent DL)"
+      ]
+    },
+    {
+      "id": "passport",
+      "name": "Passport Application",
+      "mode": "Offline",
+      "duration": "30-45 Days",
+      "requiredDocuments": [
+        "Identity Proof (Aadhaar/Voter ID/PAN)",
+        "Address Proof",
+        "Birth Certificate / DOB Proof",
+        "Passport Size Photos (as per specs)",
+        "Old Passport (for renewal)"
+      ]
+    },
+    {
+      "id": "ration-card",
+      "name": "Ration Card",
+      "mode": "Online",
+      "duration": "15-20 Days",
+      "requiredDocuments": [
+        "Identity Proof of Family Head",
+        "Address Proof",
+        "Family Member Details with Photos",
+        "Income Certificate",
+        "LPG Connection Details (if any)"
+      ]
+    }
+  ],
+  "applications": [
+    {
+      "id": "APP001",
+      "service": "Birth Certificate",
+      "status": "approved",
+      "stages": [
+        { "name": "Application Submitted", "date": "Dec 1, 2024", "completed": true, "remarks": "All documents verified" },
+        { "name": "Document Verification", "date": "Dec 3, 2024", "completed": true, "remarks": "Verified by Officer ID: OFF234" },
+        { "name": "Field Verification", "date": "Dec 5, 2024", "completed": true, "remarks": "Address confirmed" },
+        { "name": "Certificate Generated", "date": "Dec 8, 2024", "completed": true },
+        { "name": "Ready for Collection", "date": "Dec 9, 2024", "completed": true, "remarks": "Collect from Taluk Office, Counter 3" }
+      ]
+    },
+    {
+      "id": "APP002",
+      "service": "Income Certificate",
+      "status": "pending",
+      "stages": [
+        { "name": "Application Submitted", "date": "Dec 8, 2024", "completed": true },
+        { "name": "Document Verification", "date": "Dec 10, 2024", "completed": true, "remarks": "Additional document requested" },
+        { "name": "Income Assessment", "current": true, "remarks": "Under review by Tahsildar" },
+        { "name": "Certificate Generation", "completed": false },
+        { "name": "Ready for Collection", "completed": false }
+      ]
+    },
+    {
+      "id": "APP003",
+      "service": "Caste Certificate",
+      "status": "rejected",
+      "stages": [
+        { "name": "Application Submitted", "date": "Nov 25, 2024", "completed": true },
+        { "name": "Document Verification", "date": "Nov 28, 2024", "completed": true, "remarks": "Parent's certificate missing" },
+        { "name": "Rejected", "date": "Dec 1, 2024", "completed": true, "remarks": "Please reapply with parent's caste certificate" }
+      ]
+    },
+    {
+      "id": "APP004",
+      "service": "Driving License",
+      "status": "pending",
+      "stages": [
+        { "name": "Application Submitted", "date": "Dec 10, 2024", "completed": true },
+        { "name": "Document Verification", "current": true, "remarks": "Medical certificate being verified" },
+        { "name": "Driving Test Scheduled", "completed": false },
+        { "name": "License Processing", "completed": false },
+        { "name": "Ready for Dispatch", "completed": false }
+      ]
+    },
+    {
+      "id": "APP005",
+      "service": "Domicile Certificate",
+      "status": "approved",
+      "stages": [
+        { "name": "Application Submitted", "date": "Nov 15, 2024", "completed": true },
+        { "name": "Document Verification", "date": "Nov 18, 2024", "completed": true },
+        { "name": "Residence Verification", "date": "Nov 22, 2024", "completed": true, "remarks": "15+ years residence confirmed" },
+        { "name": "Certificate Generated", "date": "Nov 25, 2024", "completed": true },
+        { "name": "Dispatched", "date": "Nov 26, 2024", "completed": true, "remarks": "Sent via Speed Post" }
+      ]
+    }
+  ],
+  "officers": [
+    { "id": "OFF001", "name": "Rajesh Kumar", "designation": "Tahsildar", "department": "Revenue" },
+    { "id": "OFF002", "name": "Priya Sharma", "designation": "Village Officer", "department": "Local Administration" },
+    { "id": "OFF003", "name": "Anil Verma", "designation": "RTO Inspector", "department": "Transport" }
+  ],
+  "announcements": [
+    { "title": "New Online Services", "message": "Passport and Driving License services now available online!", "date": "Dec 1, 2024" },
+    { "title": "Holiday Notice", "message": "Office closed on Dec 25 for Christmas.", "date": "Dec 15, 2024" }
+  ]
+};
+
+// State Variables
 let storedDocuments = []
 let appointments = []
 let signatureDataUrl = null
@@ -15,8 +196,8 @@ let signatureDataUrl = null
 // Initialization
 // ============================================
 
-document.addEventListener("DOMContentLoaded", async () => {
-  await loadAppData() // This is the most critical part
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("App data loaded from embedded source")
   initializeMobileMenu()
   initializeServiceSelector()
   initializeDigiLocker()
@@ -28,40 +209,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   setMinDate()
 })
 
-/**
- * Load application data from data.json
- * FIXED: Auto-detects if running from "pages/" folder or root
- */
-async function loadAppData() {
-  try {
-    // Check if the URL contains "/pages/". If so, we need to go UP one level (../)
-    const isPagesFolder = window.location.pathname.includes("/pages/");
-    const path = isPagesFolder ? "../assets/data/data.json" : "assets/data/data.json";
-
-    console.log("Fetching data from:", path); // Debug message
-
-    const response = await fetch(path)
-    
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    appData = await response.json()
-    console.log("App data loaded successfully")
-  } catch (error) {
-    console.error("Error loading app data:", error)
-    showToast("error", "Error", "Failed to load data. Check console (F12) for details.")
-  }
-}
-
-// ... (Keep the rest of your file exactly as it was) ...
-
+// ============================================
 // Mobile Menu
+// ============================================
+
 function initializeMobileMenu() {
   const mobileMenuBtn = document.getElementById("mobileMenuBtn")
   const mobileMenu = document.getElementById("mobileMenu")
   
-  // Safety check
   if (!mobileMenuBtn || !mobileMenu) return;
 
   mobileMenuBtn.addEventListener("click", () => {
@@ -75,35 +230,49 @@ function initializeMobileMenu() {
   })
 }
 
-// Document Requirements Finder
+// ============================================
+// Document Requirements Finder (UPDATED)
+// ============================================
+
 function initializeServiceSelector() {
   const serviceSelect = document.getElementById("serviceSelect")
-  if (!serviceSelect) return 
-
   const appointmentService = document.getElementById("appointmentService") 
   
-  if (!appData) return
+  if (appData && appData.services) {
+    if (serviceSelect) {
+      appData.services.forEach((service) => {
+        const option = document.createElement("option")
+        option.value = service.id
+        // Update: Show status in dropdown
+        option.textContent = `${service.name} (${service.mode})`
+        serviceSelect.appendChild(option)
+      })
 
-  appData.services.forEach((service) => {
-    const option = document.createElement("option")
-    option.value = service.id
-    option.textContent = service.name
-    serviceSelect.appendChild(option)
+      serviceSelect.addEventListener("change", (e) => {
+        const serviceId = e.target.value
+        displayRequiredDocuments(serviceId)
+      })
+    }
 
     if (appointmentService) {
-        appointmentService.appendChild(option.cloneNode(true))
+      appData.services.forEach((service) => {
+        const option = document.createElement("option")
+        option.value = service.id
+        option.textContent = service.name
+        appointmentService.appendChild(option)
+      })
     }
-  })
-
-  serviceSelect.addEventListener("change", (e) => {
-    const serviceId = e.target.value
-    displayRequiredDocuments(serviceId)
-  })
+  }
 }
 
+/**
+ * Display required documents with Upload Options & Mode/Duration Tags
+ */
 function displayRequiredDocuments(serviceId) {
   const container = document.getElementById("documentsRequired")
   const list = document.getElementById("documentsList")
+
+  if (!container || !list) return;
 
   if (!serviceId) {
     container.classList.add("hidden")
@@ -113,18 +282,61 @@ function displayRequiredDocuments(serviceId) {
   const service = appData.services.find((s) => s.id === serviceId)
   if (!service) return
 
+  // Update Header with Service Mode AND Duration Tags
+  const header = container.querySelector('h3');
+  if (header) {
+      // Choose color based on mode
+      const modeColor = service.mode === 'Online' 
+        ? 'bg-green-100 text-green-700 border-green-200' 
+        : 'bg-orange-100 text-orange-700 border-orange-200';
+      
+      const modeIcon = service.mode === 'Online' ? '⚡' : '🏢';
+
+      header.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+            <span>Required Documents</span>
+            <div class="flex gap-2">
+                <span class="text-xs px-2 py-1 rounded-full border ${modeColor}">
+                    ${modeIcon} ${service.mode}
+                </span>
+                <span class="text-xs px-2 py-1 rounded-full border bg-blue-100 text-blue-700 border-blue-200">
+                    ⏳ ${service.duration}
+                </span>
+            </div>
+        </div>
+      `;
+  }
+
   list.innerHTML = ""
   service.requiredDocuments.forEach((doc, index) => {
+    const docId = `doc_${index}`; 
     const li = document.createElement("li")
-    li.className = "flex items-center gap-3 p-3 bg-gray-50 rounded-lg animate-slide-up"
+    
+    li.className = "flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-gray-50 rounded-lg animate-slide-up border border-gray-100 hover:border-teal/30 transition-all"
     li.style.animationDelay = `${index * 0.1}s`
+    
     li.innerHTML = `
-      <div class="w-8 h-8 bg-teal/10 rounded-full flex items-center justify-center flex-shrink-0">
-        <svg class="w-4 h-4 text-teal" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/>
-        </svg>
+      <div class="flex items-center gap-3">
+        <div id="icon_${docId}" class="w-10 h-10 bg-teal/10 rounded-full flex items-center justify-center flex-shrink-0 text-teal transition-colors duration-300">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+            <span class="text-gray-800 font-medium text-sm sm:text-base">${doc}</span>
+            <span id="status_${docId}" class="text-xs text-gray-400 font-medium mt-0.5">Waiting for upload...</span>
+        </div>
       </div>
-      <span class="text-gray-700">${doc}</span>
+      
+      <div class="flex items-center gap-2 w-full sm:w-auto">
+        <input type="file" id="${docId}" class="hidden" accept=".pdf,.jpg,.jpeg,.png" onchange="verifyUpload('${docId}')">
+        
+        <button onclick="document.getElementById('${docId}').click()" 
+          id="btn_${docId}"
+          class="w-full sm:w-auto px-4 py-2 text-xs font-semibold text-teal bg-white border border-teal rounded-lg hover:bg-teal hover:text-white active:scale-95 transition-all shadow-sm">
+          Upload
+        </button>
+      </div>
     `
     list.appendChild(li)
   })
@@ -132,7 +344,76 @@ function displayRequiredDocuments(serviceId) {
   container.classList.remove("hidden")
 }
 
+/**
+ * Handle File Upload Verification
+ */
+window.verifyUpload = function(docId) {
+    const fileInput = document.getElementById(docId);
+    const file = fileInput.files[0];
+    const statusText = document.getElementById(`status_${docId}`);
+    const iconContainer = document.getElementById(`icon_${docId}`);
+    const uploadBtn = document.getElementById(`btn_${docId}`);
+
+    if (!file) return;
+
+    // 1. Simulate "Processing" State
+    statusText.textContent = "AI Validating...";
+    statusText.className = "text-xs text-blue-500 font-semibold animate-pulse";
+    uploadBtn.textContent = "Scanning...";
+    uploadBtn.disabled = true;
+    uploadBtn.className = "w-full sm:w-auto px-4 py-2 text-xs font-semibold text-gray-400 bg-gray-100 border border-gray-200 rounded-lg cursor-wait";
+
+    // 2. Mock Delay for "AI" effect
+    setTimeout(() => {
+        const validTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
+        const maxSize = 5 * 1024 * 1024; // 5MB
+
+        if (!validTypes.includes(file.type)) {
+             handleVerificationError(docId, "Invalid file type. Use PDF/JPG.");
+             return;
+        }
+
+        if (file.size > maxSize) {
+             handleVerificationError(docId, "File too large (>5MB).");
+             return;
+        }
+
+        // 4. Success State
+        statusText.textContent = `Verified • ${formatFileSize(file.size)}`;
+        statusText.className = "text-xs text-green-600 font-bold";
+        
+        iconContainer.className = "w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 text-green-600 shadow-sm transition-all scale-110";
+        iconContainer.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>`;
+        
+        uploadBtn.textContent = "Change";
+        uploadBtn.disabled = false;
+        uploadBtn.className = "w-full sm:w-auto px-3 py-2 text-xs text-gray-500 bg-transparent border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors";
+
+        showToast("success", "Document Verified", `${file.name} looks good!`);
+
+    }, 1500); 
+}
+
+function handleVerificationError(docId, msg) {
+    const statusText = document.getElementById(`status_${docId}`);
+    const uploadBtn = document.getElementById(`btn_${docId}`);
+    const fileInput = document.getElementById(docId);
+
+    statusText.textContent = `Error: ${msg}`;
+    statusText.className = "text-xs text-red-500 font-bold";
+    
+    uploadBtn.textContent = "Try Again";
+    uploadBtn.disabled = false;
+    uploadBtn.className = "w-full sm:w-auto px-4 py-2 text-xs font-semibold text-red-500 bg-white border border-red-200 rounded-lg hover:bg-red-50";
+    
+    fileInput.value = ""; 
+    showToast("error", "Verification Failed", msg);
+}
+
+// ============================================
 // DigiLocker
+// ============================================
+
 function initializeDigiLocker() {
   const dropZone = document.getElementById("dropZone")
   if (!dropZone) return
@@ -212,7 +493,7 @@ function saveDocuments() {
 
 function renderStoredDocuments() {
   const container = document.getElementById("storedDocuments")
-  if (!container) return; // Safety check
+  if (!container) return; 
 
   if (storedDocuments.length === 0) {
     container.innerHTML = '<p class="text-gray-400 col-span-full text-center py-8">No documents uploaded yet</p>'
@@ -307,7 +588,10 @@ document.getElementById("closePreviewBtn")?.addEventListener("click", () => {
   modal.classList.remove("flex")
 })
 
-// Status Tracker
+// ============================================
+// Application Status Tracker
+// ============================================
+
 function initializeStatusTracker() {
   const trackBtn = document.getElementById("trackBtn")
   if (!trackBtn) return
@@ -388,7 +672,10 @@ function getStatusBadgeClass(status) {
   }
 }
 
+// ============================================
 // Appointment Scheduler
+// ============================================
+
 function initializeAppointmentScheduler() {
   const form = document.getElementById("appointmentForm")
   if (!form) return
@@ -518,7 +805,10 @@ function renderAppointments() {
     .join("")
 }
 
+// ============================================
 // Digital Signature
+// ============================================
+
 function initializeSignatureUpload() {
   const dropZone = document.getElementById("signatureDropZone")
   if (!dropZone) return
@@ -562,7 +852,10 @@ function displaySignature(dataUrl) {
   if (formSignature) formSignature.innerHTML = `<img src="${dataUrl}" alt="Digital signature" class="max-h-10">`
 }
 
+// ============================================
 // PDF Export
+// ============================================
+
 function initializeFormExport() {
   const exportBtn = document.getElementById("exportPdfBtn")
   if (!exportBtn) return
@@ -573,7 +866,6 @@ function initializeFormExport() {
 function exportFormAsPdf() {
   const formContent = document.getElementById("sampleForm")
   
-  // HTML Content generation (kept same as before)
   const htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -639,7 +931,10 @@ function exportFormAsPdf() {
   showToast("success", "Exported!", "Your form has been downloaded. Open in browser and print as PDF.")
 }
 
-// Dashboard
+// ============================================
+// Dashboard & Utilities
+// ============================================
+
 function updateDashboardCounts() {
   const docCount = document.getElementById("docCount")
   if (docCount) docCount.textContent = storedDocuments.length
@@ -659,7 +954,6 @@ function updateDashboardCounts() {
   }
 }
 
-// Toast
 function showToast(type, title, message) {
   const toast = document.getElementById("toast")
   if (!toast) return;
