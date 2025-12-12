@@ -4,25 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart-Sahaya — Dashboard</title>
-  <meta name="description" content="Smart-Sahaya: A user-friendly platform for government services, document management, and application tracking.">
+  <meta name="description" content="Smart-Sahaya: A user-friendly platform for government services.">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
-            primary: '#0f4c81',
-            teal: '#0ea5a4',
-            warm: '#ffd166',
-            'primary-dark': '#0a3a63',
-          }
+          colors: { primary: '#0f4c81', teal: '#0ea5a4', warm: '#ffd166', 'primary-dark': '#0a3a63' }
         }
       }
     }
   </script>
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="font-sans bg-gray-50 text-gray-800 flex flex-col min-h-screen">
@@ -31,30 +24,27 @@
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-2">
         <div class="w-10 h-10 bg-warm rounded-full flex items-center justify-center">
-          <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-          </svg>
+          <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
         </div>
         <span class="font-bold text-lg">Smart-Sahaya</span>
       </a>
       <button id="mobileMenuBtn" class="md:hidden p-2" aria-label="Toggle menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
+      
       <ul id="navLinks" class="hidden md:flex gap-6 text-sm font-medium">
-        <li><a href="services.html" class="hover:text-warm transition-colors">Services</a></li>
-        <li><a href="digilocker.html" class="hover:text-warm transition-colors">DigiLocker</a></li>
-        <li><a href="tracker.html" class="hover:text-warm transition-colors">Track Status</a></li>
-        <li><a href="appointments.html" class="hover:text-warm transition-colors">Appointments</a></li>
+        <li><a href="pages/services.html" class="hover:text-warm transition-colors">Services</a></li>
+        <li><a href="pages/digilocker.html" class="hover:text-warm transition-colors">DigiLocker</a></li>
+        <li><a href="pages/tracker.html" class="hover:text-warm transition-colors">Track Status</a></li>
+        <li><a href="pages/appointments.html" class="hover:text-warm transition-colors">Appointments</a></li>
       </ul>
     </div>
     <div id="mobileMenu" class="hidden md:hidden bg-primary-dark px-4 py-3">
       <ul class="flex flex-col gap-3 text-sm">
-        <li><a href="services.html" class="block py-2 hover:text-warm">Services</a></li>
-        <li><a href="digilocker.html" class="block py-2 hover:text-warm">DigiLocker</a></li>
-        <li><a href="tracker.html" class="block py-2 hover:text-warm">Track Status</a></li>
-        <li><a href="appointments.html" class="block py-2 hover:text-warm">Appointments</a></li>
+        <li><a href="pages/services.html" class="block py-2 hover:text-warm">Services</a></li>
+        <li><a href="pages/digilocker.html" class="block py-2 hover:text-warm">DigiLocker</a></li>
+        <li><a href="pages/tracker.html" class="block py-2 hover:text-warm">Track Status</a></li>
+        <li><a href="pages/appointments.html" class="block py-2 hover:text-warm">Appointments</a></li>
       </ul>
     </div>
   </nav>
@@ -65,56 +55,44 @@
         Government Services, <span class="text-warm">Simplified</span>
       </h1>
       <p class="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-        Your one-stop digital assistant for certificates, applications, and appointments. Fast, transparent, and accessible.
+        Your one-stop digital assistant for certificates, applications, and appointments.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="services.html" class="bg-warm text-primary font-semibold px-8 py-3 rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">
-          Apply Now
-        </a>
-        <a href="tracker.html" class="bg-white/10 backdrop-blur text-white font-semibold px-8 py-3 rounded-full border-2 border-white/30 hover:bg-white/20 transition-all">
-          Track Application
-        </a>
+        <a href="pages/services.html" class="bg-warm text-primary font-semibold px-8 py-3 rounded-full hover:bg-yellow-300 transition-all transform hover:scale-105 shadow-lg">Apply Now</a>
+        <a href="pages/tracker.html" class="bg-white/10 backdrop-blur text-white font-semibold px-8 py-3 rounded-full border-2 border-white/30 hover:bg-white/20 transition-all">Track Application</a>
       </div>
     </div>
   </header>
 
   <section class="max-w-6xl mx-auto px-4 -mt-8 relative z-10 mb-16">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <a href="digilocker.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
+      <a href="pages/digilocker.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
         <div class="w-12 h-12 bg-teal/10 rounded-lg flex items-center justify-center mb-3">
-          <svg class="w-6 h-6 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-          </svg>
+          <svg class="w-6 h-6 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
         </div>
         <h3 class="font-semibold text-sm">Documents</h3>
         <p class="text-2xl font-bold text-primary" id="docCount">0</p>
       </a>
 
-      <a href="tracker.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
+      <a href="pages/tracker.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
         <div class="w-12 h-12 bg-warm/20 rounded-lg flex items-center justify-center mb-3">
-          <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
+          <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
         <h3 class="font-semibold text-sm">Pending</h3>
         <p class="text-2xl font-bold text-yellow-600" id="pendingCount">0</p>
       </a>
 
-      <a href="tracker.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
+      <a href="pages/tracker.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
         <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-3">
-          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
         <h3 class="font-semibold text-sm">Approved</h3>
         <p class="text-2xl font-bold text-green-600" id="approvedCount">0</p>
       </a>
 
-      <a href="appointments.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
+      <a href="pages/appointments.html" class="bg-white rounded-xl p-4 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer block">
         <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
-          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
+          <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
         </div>
         <h3 class="font-semibold text-sm">Appointments</h3>
         <p class="text-2xl font-bold text-primary" id="appointmentCount">0</p>
@@ -123,52 +101,10 @@
   </section>
 
   <footer class="bg-primary text-white py-12 mt-auto">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid md:grid-cols-3 gap-8 mb-8">
-        <div>
-          <div class="flex items-center gap-2 mb-4">
-            <div class="w-10 h-10 bg-warm rounded-full flex items-center justify-center">
-              <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-              </svg>
-            </div>
-            <span class="font-bold text-lg">Smart-Sahaya</span>
-          </div>
-          <p class="text-blue-200 text-sm">Empowering citizens with seamless digital government services.</p>
-        </div>
-        <div>
-          <h4 class="font-semibold mb-4">Quick Links</h4>
-          <ul class="space-y-2 text-sm text-blue-200">
-            <li><a href="services.html" class="hover:text-warm transition-colors">Services</a></li>
-            <li><a href="digilocker.html" class="hover:text-warm transition-colors">DigiLocker</a></li>
-            <li><a href="tracker.html" class="hover:text-warm transition-colors">Track Application</a></li>
-            <li><a href="appointments.html" class="hover:text-warm transition-colors">Book Appointment</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-semibold mb-4">Contact</h4>
-          <ul class="space-y-2 text-sm text-blue-200">
-            <li>📧 support@smartsahaya.gov</li>
-            <li>📞 1800-XXX-XXXX (Toll Free)</li>
-            <li>🕐 Mon-Fri, 9 AM - 5 PM</li>
-          </ul>
-        </div>
-      </div>
-      <div class="border-t border-blue-400/30 pt-6 text-center text-sm text-blue-200">
-        <p>© 2025 Smart-Sahaya. Built for a better tomorrow. 🇮🇳</p>
-      </div>
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-blue-200 text-sm">© 2025 Smart-Sahaya. Built for a better tomorrow. 🇮🇳</p>
     </div>
   </footer>
-
-  <div id="toast" class="fixed bottom-4 right-4 transform translate-y-full opacity-0 transition-all duration-300 z-50">
-    <div class="bg-white rounded-xl shadow-2xl p-4 flex items-center gap-3 max-w-sm">
-      <div id="toastIcon" class="w-10 h-10 rounded-full flex items-center justify-center"></div>
-      <div>
-        <p id="toastTitle" class="font-semibold text-sm"></p>
-        <p id="toastMessage" class="text-xs text-gray-600"></p>
-      </div>
-    </div>
-  </div>
 
   <script src="assets/js/script.js"></script>
 </body>

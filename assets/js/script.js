@@ -36,7 +36,11 @@ document.addEventListener("DOMContentLoaded", async () => {
  */
 async function loadAppData() {
   try {
-    const response = await fetch("assets/data/data.json")
+    // FIX: Check where we are. If we are in the "pages/" folder, we need to go up one level (../)
+    const isPagesDir = window.location.pathname.includes("/pages/");
+    const dataPath = isPagesDir ? "../assets/data/data.json" : "assets/data/data.json";
+
+    const response = await fetch(dataPath)
     appData = await response.json()
     console.log("App data loaded successfully")
   } catch (error) {
