@@ -1,0 +1,200 @@
+{
+  "services": [
+    {
+      "id": "birth-cert",
+      "name": "Birth Certificate",
+      "requiredDocuments": [
+        "Hospital Birth Record / Discharge Summary",
+        "Parent's Identity Proof (Aadhaar/Passport)",
+        "Parent's Marriage Certificate",
+        "Address Proof (Utility Bill/Ration Card)",
+        "Affidavit (if birth not registered within 21 days)"
+      ]
+    },
+    {
+      "id": "death-cert",
+      "name": "Death Certificate",
+      "requiredDocuments": [
+        "Hospital Death Certificate / Medical Certificate",
+        "Deceased's Identity Proof",
+        "Applicant's Identity Proof",
+        "Cremation/Burial Certificate",
+        "Address Proof of Deceased"
+      ]
+    },
+    {
+      "id": "income-cert",
+      "name": "Income Certificate",
+      "requiredDocuments": [
+        "Identity Proof (Aadhaar/Voter ID)",
+        "Address Proof",
+        "Salary Slip / Income Tax Return",
+        "Self-Declaration of Income",
+        "Ration Card (if applicable)"
+      ]
+    },
+    {
+      "id": "caste-cert",
+      "name": "Caste Certificate",
+      "requiredDocuments": [
+        "Identity Proof (Aadhaar/Voter ID)",
+        "Address Proof",
+        "Parent's Caste Certificate",
+        "School Leaving Certificate",
+        "Affidavit declaring caste"
+      ]
+    },
+    {
+      "id": "domicile-cert",
+      "name": "Domicile Certificate",
+      "requiredDocuments": [
+        "Identity Proof (Aadhaar/Passport)",
+        "Address Proof (15+ years residence)",
+        "Birth Certificate",
+        "School/College Certificates",
+        "Affidavit of Residence"
+      ]
+    },
+    {
+      "id": "driving-license",
+      "name": "Driving License",
+      "requiredDocuments": [
+        "Age Proof (Birth Certificate/Aadhaar)",
+        "Address Proof",
+        "Passport Size Photos",
+        "Medical Certificate (Form 1A)",
+        "Learner's License (for permanent DL)"
+      ]
+    },
+    {
+      "id": "passport",
+      "name": "Passport Application",
+      "requiredDocuments": [
+        "Identity Proof (Aadhaar/Voter ID/PAN)",
+        "Address Proof",
+        "Birth Certificate / DOB Proof",
+        "Passport Size Photos (as per specs)",
+        "Old Passport (for renewal)"
+      ]
+    },
+    {
+      "id": "ration-card",
+      "name": "Ration Card",
+      "requiredDocuments": [
+        "Identity Proof of Family Head",
+        "Address Proof",
+        "Family Member Details with Photos",
+        "Income Certificate",
+        "LPG Connection Details (if any)"
+      ]
+    }
+  ],
+  "applications": [
+    {
+      "id": "APP001",
+      "service": "Birth Certificate",
+      "status": "approved",
+      "stages": [
+        {
+          "name": "Application Submitted",
+          "date": "Dec 1, 2024",
+          "completed": true,
+          "remarks": "All documents verified"
+        },
+        {
+          "name": "Document Verification",
+          "date": "Dec 3, 2024",
+          "completed": true,
+          "remarks": "Verified by Officer ID: OFF234"
+        },
+        { "name": "Field Verification", "date": "Dec 5, 2024", "completed": true, "remarks": "Address confirmed" },
+        { "name": "Certificate Generated", "date": "Dec 8, 2024", "completed": true },
+        {
+          "name": "Ready for Collection",
+          "date": "Dec 9, 2024",
+          "completed": true,
+          "remarks": "Collect from Taluk Office, Counter 3"
+        }
+      ]
+    },
+    {
+      "id": "APP002",
+      "service": "Income Certificate",
+      "status": "pending",
+      "stages": [
+        { "name": "Application Submitted", "date": "Dec 8, 2024", "completed": true },
+        {
+          "name": "Document Verification",
+          "date": "Dec 10, 2024",
+          "completed": true,
+          "remarks": "Additional document requested"
+        },
+        { "name": "Income Assessment", "current": true, "remarks": "Under review by Tahsildar" },
+        { "name": "Certificate Generation", "completed": false },
+        { "name": "Ready for Collection", "completed": false }
+      ]
+    },
+    {
+      "id": "APP003",
+      "service": "Caste Certificate",
+      "status": "rejected",
+      "stages": [
+        { "name": "Application Submitted", "date": "Nov 25, 2024", "completed": true },
+        {
+          "name": "Document Verification",
+          "date": "Nov 28, 2024",
+          "completed": true,
+          "remarks": "Parent's certificate missing"
+        },
+        {
+          "name": "Rejected",
+          "date": "Dec 1, 2024",
+          "completed": true,
+          "remarks": "Please reapply with parent's caste certificate"
+        }
+      ]
+    },
+    {
+      "id": "APP004",
+      "service": "Driving License",
+      "status": "pending",
+      "stages": [
+        { "name": "Application Submitted", "date": "Dec 10, 2024", "completed": true },
+        { "name": "Document Verification", "current": true, "remarks": "Medical certificate being verified" },
+        { "name": "Driving Test Scheduled", "completed": false },
+        { "name": "License Processing", "completed": false },
+        { "name": "Ready for Dispatch", "completed": false }
+      ]
+    },
+    {
+      "id": "APP005",
+      "service": "Domicile Certificate",
+      "status": "approved",
+      "stages": [
+        { "name": "Application Submitted", "date": "Nov 15, 2024", "completed": true },
+        { "name": "Document Verification", "date": "Nov 18, 2024", "completed": true },
+        {
+          "name": "Residence Verification",
+          "date": "Nov 22, 2024",
+          "completed": true,
+          "remarks": "15+ years residence confirmed"
+        },
+        { "name": "Certificate Generated", "date": "Nov 25, 2024", "completed": true },
+        { "name": "Dispatched", "date": "Nov 26, 2024", "completed": true, "remarks": "Sent via Speed Post" }
+      ]
+    }
+  ],
+  "officers": [
+    { "id": "OFF001", "name": "Rajesh Kumar", "designation": "Tahsildar", "department": "Revenue" },
+    { "id": "OFF002", "name": "Priya Sharma", "designation": "Village Officer", "department": "Local Administration" },
+    { "id": "OFF003", "name": "Anil Verma", "designation": "RTO Inspector", "department": "Transport" }
+  ],
+  "announcements": [
+    {
+      "title": "New Online Services",
+      "message": "Passport and Driving License services now available online!",
+      "date": "Dec 1, 2024"
+    },
+    { "title": "Holiday Notice", "message": "Office closed on Dec 25 for Christmas.", "date": "Dec 15, 2024" }
+  ]
+}
