@@ -15,11 +15,8 @@ let signatureDataUrl = null
 // Initialization
 // ============================================
 
-/**
- * Initialize the application on DOM load
- */
 document.addEventListener("DOMContentLoaded", async () => {
-  await loadAppData()
+  await loadAppData() // This is the most critical part
   initializeMobileMenu()
   initializeServiceSelector()
   initializeDigiLocker()
@@ -33,38 +30,44 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 /**
  * Load application data from data.json
+ * FIXED: Auto-detects if running from "pages/" folder or root
  */
 async function loadAppData() {
   try {
-    // FIX: Check where we are. If we are in the "pages/" folder, we need to go up one level (../)
-    const isPagesDir = window.location.pathname.includes("/pages/");
-    const dataPath = isPagesDir ? "../assets/data/data.json" : "assets/data/data.json";
+    // Check if the URL contains "/pages/". If so, we need to go UP one level (../)
+    const isPagesFolder = window.location.pathname.includes("/pages/");
+    const path = isPagesFolder ? "../assets/data/data.json" : "assets/data/data.json";
 
-    const response = await fetch(dataPath)
+    console.log("Fetching data from:", path); // Debug message
+
+    const response = await fetch(path)
+    
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     appData = await response.json()
     console.log("App data loaded successfully")
   } catch (error) {
     console.error("Error loading app data:", error)
-    showToast("error", "Error", "Failed to load application data. Please refresh.")
+    showToast("error", "Error", "Failed to load data. Check console (F12) for details.")
   }
 }
 
-// ============================================
-// Mobile Menu
-// ============================================
+// ... (Keep the rest of your file exactly as it was) ...
 
-/**
- * Initialize mobile menu toggle functionality
- */
+// Mobile Menu
 function initializeMobileMenu() {
   const mobileMenuBtn = document.getElementById("mobileMenuBtn")
   const mobileMenu = document.getElementById("mobileMenu")
+  
+  // Safety check
+  if (!mobileMenuBtn || !mobileMenu) return;
 
   mobileMenuBtn.addEventListener("click", () => {
     mobileMenu.classList.toggle("hidden")
   })
 
-  // Close menu when clicking a link
   mobileMenu.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       mobileMenu.classList.add("hidden")
@@ -72,19 +75,12 @@ function initializeMobileMenu() {
   })
 }
 
-// ============================================
 // Document Requirements Finder
-// ============================================
-
-/**
- * Initialize the service selector dropdown
- */
 function initializeServiceSelector() {
   const serviceSelect = document.getElementById("serviceSelect")
-  // SAFETY CHECK: If this element isn't on the page, stop.
   if (!serviceSelect) return 
 
-  const appointmentService = document.getElementById("appointmentService") // Might be null on services page
+  const appointmentService = document.getElementById("appointmentService") 
   
   if (!appData) return
 
@@ -94,7 +90,6 @@ function initializeServiceSelector() {
     option.textContent = service.name
     serviceSelect.appendChild(option)
 
-    // Only try to append to appointment service if it exists
     if (appointmentService) {
         appointmentService.appendChild(option.cloneNode(true))
     }
@@ -106,10 +101,6 @@ function initializeServiceSelector() {
   })
 }
 
-/**
- * Display required documents for selected service
- * @param {string} serviceId - The selected service ID
- */
 function displayRequiredDocuments(serviceId) {
   const container = document.getElementById("documentsRequired")
   const list = document.getElementById("documentsList")
@@ -141,25 +132,16 @@ function displayRequiredDocuments(serviceId) {
   container.classList.remove("hidden")
 }
 
-// ============================================
 // DigiLocker
-// ============================================
-
-/**
- * Initialize DigiLocker document upload functionality
- */
 function initializeDigiLocker() {
   const dropZone = document.getElementById("dropZone")
   if (!dropZone) return
   const fileInput = document.getElementById("fileInput")
 
-  // Load stored documents from localStorage
   loadStoredDocuments()
 
-  // Click to upload
   dropZone.addEventListener("click", () => fileInput.click())
 
-  // Drag and drop handlers
   dropZone.addEventListener("dragover", (e) => {
     e.preventDefault()
     dropZone.classList.add("drop-zone-active")
@@ -175,15 +157,11 @@ function initializeDigiLocker() {
     handleFileUpload(e.dataTransfer.files)
   })
 
-  // File input change
   fileInput.addEventListener("change", (e) => {
     handleFileUpload(e.target.files)
   })
 }
 
-/**
- * Load stored documents from localStorage
- */
 function loadStoredDocuments() {
   const stored = localStorage.getItem("smartSahaya_documents")
   if (stored) {
@@ -192,28 +170,21 @@ function loadStoredDocuments() {
   }
 }
 
-/**
- * Handle file upload
- * @param {FileList} files - The files to upload
- */
 function handleFileUpload(files) {
   const maxSize = 5 * 1024 * 1024 // 5MB
   const allowedTypes = ["application/pdf", "image/jpeg", "image/png"]
 
   Array.from(files).forEach((file) => {
-    // Validate file type
     if (!allowedTypes.includes(file.type)) {
       showToast("error", "Invalid File", `${file.name} is not a supported file type.`)
       return
     }
 
-    // Validate file size
     if (file.size > maxSize) {
       showToast("error", "File Too Large", `${file.name} exceeds 5MB limit.`)
       return
     }
 
-    // Read and store file
     const reader = new FileReader()
     reader.onload = (e) => {
       const doc = {
@@ -235,18 +206,13 @@ function handleFileUpload(files) {
   })
 }
 
-/**
- * Save documents to localStorage
- */
 function saveDocuments() {
   localStorage.setItem("smartSahaya_documents", JSON.stringify(storedDocuments))
 }
 
-/**
- * Render stored documents in the UI
- */
 function renderStoredDocuments() {
   const container = document.getElementById("storedDocuments")
+  if (!container) return; // Safety check
 
   if (storedDocuments.length === 0) {
     container.innerHTML = '<p class="text-gray-400 col-span-full text-center py-8">No documents uploaded yet</p>'
@@ -289,10 +255,6 @@ function renderStoredDocuments() {
     .join("")
 }
 
-/**
- * Preview a document
- * @param {string} docId - The document ID
- */
 function previewDocument(docId) {
   const doc = storedDocuments.find((d) => d.id === docId)
   if (!doc) return
@@ -317,10 +279,6 @@ function previewDocument(docId) {
   modal.classList.add("flex")
 }
 
-/**
- * Download a document
- * @param {string} docId - The document ID
- */
 function downloadDocument(docId) {
   const doc = storedDocuments.find((d) => d.id === docId)
   if (!doc) return
@@ -333,10 +291,6 @@ function downloadDocument(docId) {
   showToast("success", "Downloaded!", `${doc.name} has been downloaded.`)
 }
 
-/**
- * Delete a document
- * @param {string} docId - The document ID
- */
 function deleteDocument(docId) {
   if (!confirm("Are you sure you want to delete this document?")) return
 
@@ -347,20 +301,13 @@ function deleteDocument(docId) {
   showToast("success", "Deleted", "Document has been removed.")
 }
 
-// Close preview modal
 document.getElementById("closePreviewBtn")?.addEventListener("click", () => {
   const modal = document.getElementById("previewModal")
   modal.classList.add("hidden")
   modal.classList.remove("flex")
 })
 
-// ============================================
-// Application Status Tracker
-// ============================================
-
-/**
- * Initialize the status tracker
- */
+// Status Tracker
 function initializeStatusTracker() {
   const trackBtn = document.getElementById("trackBtn")
   if (!trackBtn) return
@@ -372,10 +319,6 @@ function initializeStatusTracker() {
   })
 }
 
-/**
- * Track an application by ID
- * @param {string} appId - The application ID
- */
 function trackApplication(appId) {
   const timelineContainer = document.getElementById("timelineContainer")
   const noFound = document.getElementById("noApplicationFound")
@@ -383,12 +326,22 @@ function trackApplication(appId) {
   const title = document.getElementById("applicationTitle")
   const badge = document.getElementById("applicationBadge")
 
+  // Safety check
+  if (!timelineContainer || !noFound) return;
+
   if (!appId.trim()) {
     showToast("error", "Required", "Please enter an Application ID.")
     return
   }
 
-  const application = appData?.applications.find((a) => a.id.toLowerCase() === appId.trim().toLowerCase())
+  // Debug: Check if data is loaded
+  if (!appData || !appData.applications) {
+    showToast("error", "Error", "Application data not loaded. Please refresh.");
+    console.error("AppData is null:", appData);
+    return;
+  }
+
+  const application = appData.applications.find((a) => a.id.toLowerCase() === appId.trim().toLowerCase())
 
   if (!application) {
     timelineContainer.classList.add("hidden")
@@ -399,12 +352,10 @@ function trackApplication(appId) {
   noFound.classList.add("hidden")
   timelineContainer.classList.remove("hidden")
 
-  // Update title and badge
   title.textContent = `${application.service} - ${application.id}`
   badge.textContent = application.status.charAt(0).toUpperCase() + application.status.slice(1)
   badge.className = `px-3 py-1 rounded-full text-sm font-medium status-badge ${getStatusBadgeClass(application.status)}`
 
-  // Render timeline
   timeline.innerHTML = application.stages
     .map((stage, index) => {
       const dotClass = stage.completed ? "completed" : stage.current ? "current" : "pending"
@@ -424,11 +375,6 @@ function trackApplication(appId) {
   showToast("success", "Found!", `Application ${application.id} loaded successfully.`)
 }
 
-/**
- * Get CSS class for status badge
- * @param {string} status - The application status
- * @returns {string} CSS classes
- */
 function getStatusBadgeClass(status) {
   switch (status) {
     case "approved":
@@ -442,22 +388,14 @@ function getStatusBadgeClass(status) {
   }
 }
 
-// ============================================
 // Appointment Scheduler
-// ============================================
-
-/**
- * Initialize appointment scheduler
- */
 function initializeAppointmentScheduler() {
   const form = document.getElementById("appointmentForm")
   if (!form) return
   const timeSlots = document.querySelectorAll(".time-slot")
 
-  // Load appointments from localStorage
   loadAppointments()
 
-  // Time slot selection
   timeSlots.forEach((slot) => {
     slot.addEventListener("click", () => {
       timeSlots.forEach((s) => s.classList.remove("selected"))
@@ -466,32 +404,29 @@ function initializeAppointmentScheduler() {
     })
   })
 
-  // Form submission
   form.addEventListener("submit", (e) => {
     e.preventDefault()
     bookAppointment()
   })
 }
 
-/**
- * Set minimum date for appointment (today)
- */
 function setMinDate() {
   const dateInput = document.getElementById("appointmentDate")
+  if (!dateInput) return; // Safety check
   const today = new Date().toISOString().split("T")[0]
   dateInput.min = today
 
   // Also set form date
-  document.getElementById("formDate").textContent = new Date().toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  })
+  const formDate = document.getElementById("formDate");
+  if (formDate) {
+    formDate.textContent = new Date().toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+    })
+  }
 }
 
-/**
- * Load appointments from localStorage
- */
 function loadAppointments() {
   const stored = localStorage.getItem("smartSahaya_appointments")
   if (stored) {
@@ -500,9 +435,6 @@ function loadAppointments() {
   }
 }
 
-/**
- * Book a new appointment
- */
 function bookAppointment() {
   const service = document.getElementById("appointmentService").value
   const date = document.getElementById("appointmentDate").value
@@ -513,11 +445,15 @@ function bookAppointment() {
     return
   }
 
-  // Simulate officer response (random for demo)
   const statuses = ["accepted", "pending", "pending", "accepted"]
   const status = statuses[Math.floor(Math.random() * statuses.length)]
 
-  const serviceName = appData.services.find((s) => s.id === service)?.name || service
+  // Safety check for appData
+  let serviceName = service;
+  if (appData && appData.services) {
+    const foundService = appData.services.find((s) => s.id === service);
+    if (foundService) serviceName = foundService.name;
+  }
 
   const appointment = {
     id: "APT" + Date.now().toString().slice(-6),
@@ -533,7 +469,6 @@ function bookAppointment() {
   renderAppointments()
   updateDashboardCounts()
 
-  // Reset form
   document.getElementById("appointmentForm").reset()
   document.querySelectorAll(".time-slot").forEach((s) => s.classList.remove("selected"))
 
@@ -543,11 +478,9 @@ function bookAppointment() {
   showToast(status === "accepted" ? "success" : "warning", "Appointment Requested", statusMessage)
 }
 
-/**
- * Render appointments list
- */
 function renderAppointments() {
   const container = document.getElementById("appointmentsList")
+  if (!container) return;
 
   if (appointments.length === 0) {
     container.innerHTML = '<p class="text-gray-400 text-center py-8">No appointments scheduled</p>'
@@ -585,19 +518,12 @@ function renderAppointments() {
     .join("")
 }
 
-// ============================================
 // Digital Signature
-// ============================================
-
-/**
- * Initialize signature upload
- */
 function initializeSignatureUpload() {
   const dropZone = document.getElementById("signatureDropZone")
   if (!dropZone) return
   const input = document.getElementById("signatureInput")
 
-  // Load saved signature
   const savedSignature = localStorage.getItem("smartSahaya_signature")
   if (savedSignature) {
     signatureDataUrl = savedSignature
@@ -626,28 +552,17 @@ function initializeSignatureUpload() {
   })
 }
 
-/**
- * Display signature in preview areas
- * @param {string} dataUrl - The signature image data URL
- */
 function displaySignature(dataUrl) {
   const preview = document.getElementById("signaturePreview")
   const image = document.getElementById("signatureImage")
   const formSignature = document.getElementById("formSignature")
 
-  image.src = dataUrl
-  preview.classList.remove("hidden")
-
-  formSignature.innerHTML = `<img src="${dataUrl}" alt="Digital signature" class="max-h-10">`
+  if (image) image.src = dataUrl
+  if (preview) preview.classList.remove("hidden")
+  if (formSignature) formSignature.innerHTML = `<img src="${dataUrl}" alt="Digital signature" class="max-h-10">`
 }
 
-// ============================================
 // PDF Export
-// ============================================
-
-/**
- * Initialize PDF export functionality
- */
 function initializeFormExport() {
   const exportBtn = document.getElementById("exportPdfBtn")
   if (!exportBtn) return
@@ -655,13 +570,10 @@ function initializeFormExport() {
   exportBtn.addEventListener("click", exportFormAsPdf)
 }
 
-/**
- * Export form as downloadable PDF (simulated)
- */
 function exportFormAsPdf() {
   const formContent = document.getElementById("sampleForm")
-
-  // Create a styled HTML document for the "PDF"
+  
+  // HTML Content generation (kept same as before)
   const htmlContent = `
     <!DOCTYPE html>
     <html>
@@ -716,7 +628,6 @@ function exportFormAsPdf() {
     </html>
   `
 
-  // Create blob and download
   const blob = new Blob([htmlContent], { type: "text/html" })
   const url = URL.createObjectURL(blob)
   const link = document.createElement("a")
@@ -728,33 +639,31 @@ function exportFormAsPdf() {
   showToast("success", "Exported!", "Your form has been downloaded. Open in browser and print as PDF.")
 }
 
-// ============================================
-// Dashboard & Utilities
-// ============================================
-
-/**
- * Update dashboard counts
- */
+// Dashboard
 function updateDashboardCounts() {
-  document.getElementById("docCount").textContent = storedDocuments.length
-  document.getElementById("appointmentCount").textContent = appointments.length
+  const docCount = document.getElementById("docCount")
+  if (docCount) docCount.textContent = storedDocuments.length
+  
+  const apptCount = document.getElementById("appointmentCount")
+  if (apptCount) apptCount.textContent = appointments.length
 
-  if (appData) {
+  if (appData && appData.applications) {
     const pending = appData.applications.filter((a) => a.status === "pending").length
     const approved = appData.applications.filter((a) => a.status === "approved").length
-    document.getElementById("pendingCount").textContent = pending
-    document.getElementById("approvedCount").textContent = approved
+    
+    const pendingEl = document.getElementById("pendingCount")
+    if (pendingEl) pendingEl.textContent = pending
+    
+    const approvedEl = document.getElementById("approvedCount")
+    if (approvedEl) approvedEl.textContent = approved
   }
 }
 
-/**
- * Show toast notification
- * @param {string} type - Toast type (success, error, warning)
- * @param {string} title - Toast title
- * @param {string} message - Toast message
- */
+// Toast
 function showToast(type, title, message) {
   const toast = document.getElementById("toast")
+  if (!toast) return;
+
   const icon = document.getElementById("toastIcon")
   const titleEl = document.getElementById("toastTitle")
   const messageEl = document.getElementById("toastMessage")
@@ -790,22 +699,12 @@ function showToast(type, title, message) {
   }, 3000)
 }
 
-/**
- * Format file size to human readable
- * @param {number} bytes - File size in bytes
- * @returns {string} Formatted size
- */
 function formatFileSize(bytes) {
   if (bytes < 1024) return bytes + " B"
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB"
   return (bytes / (1024 * 1024)).toFixed(1) + " MB"
 }
 
-/**
- * Format date string
- * @param {string} dateStr - Date string (YYYY-MM-DD)
- * @returns {string} Formatted date
- */
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString("en-IN", {
     day: "numeric",
@@ -814,11 +713,6 @@ function formatDate(dateStr) {
   })
 }
 
-/**
- * Format time string
- * @param {string} timeStr - Time string (HH:MM)
- * @returns {string} Formatted time
- */
 function formatTime(timeStr) {
   const [hours, minutes] = timeStr.split(":")
   const h = Number.parseInt(hours)
