@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
  */
 async function loadAppData() {
   try {
-    const response = await fetch("data.json")
+    const response = await fetch("assets/data/data.json")
     appData = await response.json()
     console.log("App data loaded successfully")
   } catch (error) {

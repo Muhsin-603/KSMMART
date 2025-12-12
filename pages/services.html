@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart-Sahaya — Services</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { primary: '#0f4c81', teal: '#0ea5a4', warm: '#ffd166', 'primary-dark': '#0a3a63' } } } }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="font-sans bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+  <nav class="bg-primary text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-10 h-10 bg-warm rounded-full flex items-center justify-center">
+          <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <span class="font-bold text-lg">Smart-Sahaya</span>
+      </a>
+      <ul class="hidden md:flex gap-6 text-sm font-medium">
+        <li><a href="services.html" class="text-warm">Services</a></li> <li><a href="digilocker.html" class="hover:text-warm">DigiLocker</a></li>
+        <li><a href="tracker.html" class="hover:text-warm">Track Status</a></li>
+        <li><a href="appointments.html" class="hover:text-warm">Appointments</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="flex-grow">
+    <section class="max-w-6xl mx-auto px-4 py-16">
+      <h2 class="text-3xl font-bold text-primary mb-2">Document Requirements Finder</h2>
+      <p class="text-gray-600 mb-8">Select a service to see what you need.</p>
+      
+      <div class="bg-white rounded-2xl shadow-lg p-8">
+        <div class="mb-6">
+          <label for="serviceSelect" class="block text-sm font-medium text-gray-700 mb-2">Choose a Service</label>
+          <select id="serviceSelect" class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-teal outline-none">
+            <option value="">-- Select a Service --</option>
+          </select>
+        </div>
+        <div id="documentsRequired" class="hidden">
+            <h3 class="font-semibold text-lg mb-4">Required Documents</h3>
+            <ul id="documentsList" class="space-y-2"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-primary text-white py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center text-sm text-blue-200">
+      <p>© 2025 Smart-Sahaya.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
