@@ -5,21 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart-Sahaya — Dashboard</title>
   <meta name="description" content="Smart-Sahaya: A user-friendly platform for government services, document management, and application tracking.">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#0f4c81',
-            teal: '#0ea5a4',
-            warm: '#ffd166',
-            'primary-dark': '#0a3a63',
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="tailwind.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -148,8 +134,8 @@
         <div>
           <h4 class="font-semibold mb-4">Contact</h4>
           <ul class="space-y-2 text-sm text-blue-200">
-            <li>📧 support@smartsahaya.gov</li>
-            <li>📞 1800-XXX-XXXX (Toll Free)</li>
+            <li>📧 <a href="mailto:support@smartsahaya.gov" class="hover:text-warm transition-colors">support@smartsahaya.gov</a></li>
+            <li>📞 <a href="tel:1800-XXX-XXXX" class="hover:text-warm transition-colors">1800-XXX-XXXX</a> (Toll Free)</li>
             <li>🕐 Mon-Fri, 9 AM - 5 PM</li>
           </ul>
         </div>
